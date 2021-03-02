@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>flexicell</title>
+        <link rel="stylesheet" href="flexicell.css">
+    </head>
+    <body>
+        <form id="config-form">
+            <label for="survive-lower-bound">Survive when greater than or equal to</label>
+            <input id="survive-lower-bound" type="number" min=0 max=8 />
+
+            <label for="spawn-lower-bound">Spawn when greater than or equal to</label>
+            <input id="spawn-lower-bound" type="number" min=0 max=8 />
+            
+            <label for="spawn-upper-bound">Spawn when less than or equal to</label>
+            <input id="spawn-upper-bound" type="number" min=0 max=8 />
+
+            <label for="survive-upper-bound">Survive when less than or equal to</label>
+            <input id="survive-upper-bound" type="number" min=0 max=8 />
+
+            <label for="hertz">Speed</label>
+            <input id="hertz" type="number" min=0 max=60 />
+        </form>
+        <input type="button" id="start-button" value="Start" />
+        <input type="button" id="pause-button" value="Pause" />
+        <canvas id="canvas" width=800 height=600 class="centered"></canvas>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/ocanvas/2.10.0/ocanvas.min.js"></script>
+        <script type="text/javascript" src="flexicell.js"></script>
+    </body>
+</html>
