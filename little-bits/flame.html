@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/p5.js"></script>
+        <style>
+            body {
+                background-color: black;
+            }
+
+            canvas {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                margin-top: -300px;
+                margin-left: -400px;
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            let circles = [];
+
+            function createCircle(timeOffset)
+            {
+                return {
+                    x: width / 2,
+                    y: height / 2,
+                    offsetX: random(-(width/3), width/3),
+                    offsetY: random(-(height/3), height/3),
+                    timeOffset: timeOffset
+                };
+            }
+
+            function setup() {
+                createCanvas(800, 600);
+                
+                for (var i = 0; i < 20; i++)
+                {
+                    const circle = createCircle(i);
+                    circles.push(circle);
+                }
+            }
+
+            function draw()
+            {
+                background(0);
+
+                circles.forEach((cir) => {
+                    process(cir);
+                });
+            }
+
+            function process(circle) {
+                const time = Date.now() + circle.timeOffset * 1000 + circle.timeOffset * 369;
+                const interval = 5;
+                const sec = (time / 1000) % interval;
+                const wave = abs(abs(interval - sec) - sec);
+                const magnitude = Math.pow(wave, 2);
+                
+                if (wave < 1) {
+                    // drawCircle(circle, wave);
+                    circle.offsetX = random(-(width/3), width/3);
+                    circle.offsetY = random(-(height/3), height/3);
+                    return;
+                }
+                
+                drawCircle(circle, wave);
+                const diffX = circle.x - (width / 2);
+                const diffY = circle.y - (height / 2);
+                circle.x = circle.x + random(-magnitude - diffX, magnitude - diffX) + circle.offsetX;
+                circle.y = circle.y + random(-magnitude - diffY, magnitude - diffY) + circle.offsetY;
+            }
+
+            function drawCircle(circle, wave)
+            {
+                stroke(255 - 255 / wave, 0, 0);
+                fill(255 - 255 / wave, 80 - 80 / wave - 1, 100 - 100 / (wave - circle.timeOffset));
+                ellipse(circle.x, circle.y, 24, 24);
+            }
+        </script>
+    </body>
+</html>
